@@ -9,6 +9,7 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailsScreen from "./screens/MealDetailsScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
+import FavoritesContextProvider from "./store/context/favorites-context";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -62,51 +63,53 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: "black",
-            },
-            contentStyle: {
-              backgroundColor: "#1e1e1e",
-            },
-            headerTitleStyle: {
-              color: "white",
-            },
-            headerTintColor: "white",
-          }}
-        >
-          <Stack.Screen
-            name="Drawer"
-            // component={CategoriesScreen}
-            component={DrawerNavigator}
-            options={{
-              // title: "All Categories",
-              headerShown: false,
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "black",
+              },
+              contentStyle: {
+                backgroundColor: "#1e1e1e",
+              },
+              headerTitleStyle: {
+                color: "white",
+              },
+              headerTintColor: "white",
             }}
-          />
-          <Stack.Screen
-            name="MealsOverview"
-            component={MealsOverviewScreen}
-            // options={({ route }) => {
-            //   return {
-            //     title: route.params.categoryId,
-            //   };
-            // }}
-          />
-          <Stack.Screen
-            name="MealDetails"
-            component={MealDetailsScreen}
-            options={{
-              title: "About The Meal",
-              // headerRight: () => {
-              //   return <Button title={"Button"} />;
-              // },
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="Drawer"
+              // component={CategoriesScreen}
+              component={DrawerNavigator}
+              options={{
+                // title: "All Categories",
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="MealsOverview"
+              component={MealsOverviewScreen}
+              // options={({ route }) => {
+              //   return {
+              //     title: route.params.categoryId,
+              //   };
+              // }}
+            />
+            <Stack.Screen
+              name="MealDetails"
+              component={MealDetailsScreen}
+              options={{
+                title: "About The Meal",
+                // headerRight: () => {
+                //   return <Button title={"Button"} />;
+                // },
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
